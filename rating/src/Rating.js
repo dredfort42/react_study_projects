@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const containerStyle = {
     display: 'flex',
@@ -10,50 +11,87 @@ const starsContainerStyle = {
     display: 'flex',
 };
 
-const textStyle = {
-    lineHeight: '1',
-    margin: '0',
+Rating.prototype = {
+    maxRating: PropTypes.number,
+    defaultRating: PropTypes.number,
+    color: PropTypes.string,
+    size: PropTypes.number,
+    className: PropTypes.string,
+    messages: PropTypes.array,
+    onSetRating: PropTypes.func,
 };
 
-export default function Rating({ maxRating = 5 }) {
-    const [rating, setRating] = useState(0);
+export default function Rating({
+    maxRating = 5,
+    defaultRating = 0,
+    color = '#fcc419',
+    size = 48,
+    className = '',
+    messages = [],
+    onSetRating,
+}) {
+    const [rating, setRating] = useState(defaultRating);
+    const [tmpRating, setTmpRating] = useState(0);
 
     function handleRating(rating) {
         setRating(rating);
+        onSetRating(rating);
     }
 
+    const textStyle = {
+        lineHeight: 1,
+        margin: '0',
+        color,
+        fontSize: `${size / 1.5}px`,
+    };
+
+    console.log(messages);
+
     return (
-        <div style={containerStyle}>
+        <div style={containerStyle} className={className}>
             <div style={starsContainerStyle}>
                 {Array.from({ length: maxRating }, (_, i) => (
                     <Star
                         key={`star_` + i}
                         onSelectRate={() => handleRating(i + 1)}
-                        full={i < rating}
+                        full={i < (tmpRating ? tmpRating : rating)}
+                        onHoverIn={() => setTmpRating(i + 1)}
+                        onHoverOut={() => setTmpRating(0)}
+                        color={color}
+                        size={size}
                     />
                 ))}
             </div>
-            <p style={textStyle}>{rating || ''}</p>
+            <p style={textStyle}>
+                {messages.length === maxRating
+                    ? messages[(tmpRating ? tmpRating : rating) - 1]
+                    : tmpRating || rating || ''}
+            </p>
         </div>
     );
 }
 
-const starStyle = {
-    width: '48px',
-    height: '48px',
-    display: 'block',
-    cursor: 'pointer',
-};
-
-function Star({ onSelectRate, full }) {
+function Star({ onSelectRate, full, onHoverIn, onHoverOut, color, size }) {
+    const starStyle = {
+        width: `${size}px`,
+        height: `${size}px`,
+        display: 'block',
+        cursor: 'pointer',
+    };
     return (
-        <span role="button" style={starStyle} onClick={onSelectRate}>
+        <span
+            role="button"
+            style={starStyle}
+            onClick={onSelectRate}
+            onMouseEnter={onHoverIn}
+            onMouseLeave={onHoverOut}
+        >
             {full ? (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
-                    fill="#000"
-                    stroke="#000"
+                    fill={color}
+                    stroke={color}
                 >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
@@ -62,7 +100,7 @@ function Star({ onSelectRate, full }) {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke="#000"
+                    stroke={color}
                 >
                     <path
                         strokeLinecap="round"
