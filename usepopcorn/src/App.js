@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const tempMovieData = [
     {
@@ -45,9 +45,17 @@ const tempWatchedData = [
 const average = (arr) =>
     arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
+const KEY = 'b84130da';
+
 export default function App() {
-    const [movies, setMovies] = useState(tempMovieData);
-    const [watched, setWatched] = useState(tempWatchedData);
+    const [movies, setMovies] = useState([]);
+    const [watched, setWatched] = useState([]);
+
+    useEffect(function () {
+        fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=sky`)
+            .then((res) => res.json())
+            .then((data) => setMovies(data.Search));
+    }, []);
 
     return (
         <div>
@@ -76,7 +84,7 @@ function MoviesData({ watched }) {
     return (
         <ul className="list">
             {watched.map((movie) => (
-                <Movie movie={movie}>
+                <Movie movie={movie} key={movie.imdbID}>
                     <MovieData
                         imdbRating={movie.imdbRating}
                         userRating={movie.userRating}
@@ -115,7 +123,7 @@ function FoundMovies({ movies }) {
     return (
         <ul className="list">
             {movies?.map((movie) => (
-                <Movie movie={movie}>
+                <Movie movie={movie} key={movie.imdbID}>
                     <span>🗓</span>
                     <span>{movie.Year}</span>
                 </Movie>
