@@ -10,7 +10,7 @@
         "lat": 38.727881642324164,
         "lng": -9.140900099907554
       },
-      "id": 73930385
+      "id": "73930385"
     },
     {
       "cityName": "Madrid",
@@ -22,7 +22,7 @@
         "lat": 40.46635901755316,
         "lng": -3.7133789062500004
       },
-      "id": 17806751
+      "id": "17806751"
     },
     {
       "cityName": "Berlin",
@@ -34,7 +34,55 @@
         "lat": 52.53586782505711,
         "lng": 13.376933665713324
       },
-      "id": 98443197
+      "id": "98443197"
+    },
+    {
+      "id": "8d69",
+      "cityName": "London",
+      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "emoji": "🇬🇧",
+      "date": "2024-11-05T23:09:05.371Z",
+      "notes": "",
+      "position": {
+        "lat": "51.515579783755925",
+        "lng": "-0.12084960937500001"
+      }
+    },
+    {
+      "id": "58eb",
+      "cityName": "Viana do Castelo",
+      "country": "Portugal",
+      "emoji": "🇵🇹",
+      "date": "2024-11-05T23:10:46.658Z",
+      "notes": "",
+      "position": {
+        "lat": "41.72213058512578",
+        "lng": "-8.811035156250002"
+      }
+    },
+    {
+      "id": "c490",
+      "cityName": "Santiago de Compostela",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-11-05T23:12:21.581Z",
+      "notes": "",
+      "position": {
+        "lat": "42.88401467044253",
+        "lng": "-8.547363281250002"
+      }
+    },
+    {
+      "id": "6b4d",
+      "cityName": "Ourense",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-11-05T23:12:37.879Z",
+      "notes": "",
+      "position": {
+        "lat": "42.35854391749705",
+        "lng": "-7.866210937500001"
+      }
     }
   ]
 }
