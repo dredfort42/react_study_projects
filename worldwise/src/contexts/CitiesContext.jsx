@@ -10,6 +10,7 @@ const initialState = {
     currentCity: {},
     error: '',
 };
+
 function ruducer(state, action) {
     switch (action.type) {
         case 'loading':

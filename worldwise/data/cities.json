@@ -47,6 +47,30 @@
         "lat": "50.812877010308966",
         "lng": "3.2849121093750004"
       }
+    },
+    {
+      "id": "2252",
+      "cityName": "Bath",
+      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "emoji": "🇬🇧",
+      "date": "2024-11-08T20:21:50.325Z",
+      "notes": "",
+      "position": {
+        "lat": "51.37178037591739",
+        "lng": "-2.3181152343750004"
+      }
+    },
+    {
+      "id": "7218",
+      "cityName": "London",
+      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "emoji": "🇬🇧",
+      "date": "2024-11-08T21:50:22.604Z",
+      "notes": "",
+      "position": {
+        "lat": "51.50190410761811",
+        "lng": "-0.10986328125000001"
+      }
     }
   ]
 }
