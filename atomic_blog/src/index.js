@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './style.css';
-import App from './App_memo';
+import App from './App';
 import { PostProvider } from './PostProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
