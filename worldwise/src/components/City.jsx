@@ -21,7 +21,7 @@ function City() {
         function () {
             getCurrentCity(id);
         },
-        [id]
+        [id, getCurrentCity]
     );
 
     if (isLoading) {

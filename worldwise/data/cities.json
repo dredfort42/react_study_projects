@@ -71,6 +71,30 @@
         "lat": "51.50190410761811",
         "lng": "-0.10986328125000001"
       }
+    },
+    {
+      "id": "0d5f",
+      "cityName": "Abrantes",
+      "country": "Portugal",
+      "emoji": "🇵🇹",
+      "date": "2024-11-12T18:23:50.579Z",
+      "notes": "",
+      "position": {
+        "lat": "39.470125122358176",
+        "lng": "-8.195800781250002"
+      }
+    },
+    {
+      "id": "0423",
+      "cityName": "Cambridge",
+      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "emoji": "🇬🇧",
+      "date": "2024-11-12T18:32:20.879Z",
+      "notes": "",
+      "position": {
+        "lat": "52.221069523572794",
+        "lng": "0.13183593750000003"
+      }
     }
   ]
 }
