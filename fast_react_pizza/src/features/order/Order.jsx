@@ -8,6 +8,7 @@ import {
 import { getOrder } from "../../services/apiRestaurant";
 import { useLoaderData } from "react-router-dom";
 import OrderItem from "./OrderItem";
+import { useSelector } from "react-redux";
 
 function Order() {
   const order = useLoaderData();
