@@ -56,7 +56,7 @@ function CreateOrder() {
             type="text"
             name="customer"
             required
-            value={username}
+            defaultValue={username}
           />
         </div>
 
