@@ -2,15 +2,11 @@ import Button from "../../ui/Button";
 import { useSelector } from "react-redux";
 import { getCart } from "../cart/cartSlice";
 import EmptyCart from "../cart/EmptyCart";
-import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
+import { Form, useActionData, useNavigation } from "react-router-dom";
+import { useState } from "react";
 
-// https://uibakery.io/regex-library/phone-number
-const isValidPhone = (str) =>
-  /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-    str,
-  );
-
-function CreateOrder() {
+export default function CreateOrder() {
+  const [withPriority, setWithPriority] = useState(false);
   const username = useSelector((state) => state.user.username);
   const cart = useSelector(getCart);
   console.log(cart);
@@ -68,8 +64,8 @@ function CreateOrder() {
             type="checkbox"
             name="priority"
             id="priority"
-            // value={withPriority}
-            // onChange={(e) => setWithPriority(e.target.checked)}
+            value={withPriority}
+            onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label className="font-medium" htmlFor="priority">
             Want to yo give your order priority?
@@ -85,26 +81,4 @@ function CreateOrder() {
       </Form>
     </div>
   );
-}
-
-export default CreateOrder;
-
-export async function action({ request }) {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-
-  const order = {
-    ...data,
-    cart: JSON.parse(data.cart),
-    priority: data.priority === "on",
-  };
-
-  const errors = {};
-  if (!isValidPhone(order.phone))
-    errors.phone = "Please give us your correct phone number.";
-
-  if (Object.keys(errors).length > 0) return errors;
-
-  const newOrder = await CreateOrder(order);
-  return redirect(`/order/${newOrder.id}`);
 }
