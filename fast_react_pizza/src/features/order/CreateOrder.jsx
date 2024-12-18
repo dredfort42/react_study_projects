@@ -1,18 +1,24 @@
 import Button from "../../ui/Button";
-import { useSelector } from "react-redux";
-import { getCart } from "../cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getCart, getTotalCartPrice } from "../cart/cartSlice";
 import EmptyCart from "../cart/EmptyCart";
 import { Form, useActionData, useNavigation } from "react-router-dom";
 import { useState } from "react";
+import { formatCurrency } from "../../utils/helpers";
+import { fetchAddress } from "../user/userSlice";
 
 export default function CreateOrder() {
   const [withPriority, setWithPriority] = useState(false);
   const username = useSelector((state) => state.user.username);
   const cart = useSelector(getCart);
-  console.log(cart);
+  const totalCartPrice = useSelector(getTotalCartPrice);
+  const priorityPrice = withPriority ? totalCartPrice * 0.2 : 0;
+  const totalPrice = totalCartPrice + priorityPrice;
 
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+
+  const dispatch = useDispatch();
 
   const formErrors = useActionData();
 
@@ -21,6 +27,8 @@ export default function CreateOrder() {
   return (
     <div className="px-4 py-6">
       <h2 className="mb-8 text-xl font-semibold">Ready to order? Let's go!</h2>
+
+      <button onClick={() => dispatch(fetchAddress())}>Position</button>
 
       <Form method="POST">
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
@@ -75,7 +83,9 @@ export default function CreateOrder() {
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           <Button type="primary" disabled={isSubmitting}>
-            {isSubmitting ? "Placing order..." : "Order now"}
+            {isSubmitting
+              ? "Placing order..."
+              : `Order now for ${formatCurrency(totalPrice)}`}
           </Button>
         </div>
       </Form>
