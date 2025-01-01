@@ -13,11 +13,17 @@ import Login from '../src/pages/Login';
 import PageNotFound from '../src/pages/PageNotFound';
 import Settings from '../src/pages/Settings';
 import Users from '../src/pages/Users';
+import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            staleTime: 60 * 1000,
+            // staleTime: 60 * 1000,
+            staleTime: 10000, // Data is fresh for 10 seconds
+            cacheTime: 60000, // Cache data for 1 minute
+            refetchOnWindowFocus: true,
+            refetchOnReconnect: true,
+            // refetchInterval: 5000, // Poll every 5 seconds
         },
     },
 });
@@ -45,6 +51,27 @@ export default function App() {
                     <Route path="*" element={<PageNotFound />} />
                 </Routes>
             </BrowserRouter>
+
+            <Toaster
+                position="bottom-right"
+                gutter={12}
+                containerStyle={{ margin: '8px' }}
+                toastOptions={{
+                    success: {
+                        duration: 3000,
+                    },
+                    error: {
+                        duration: 5000,
+                    },
+                    style: {
+                        fontSize: '16px',
+                        maxWidth: '500px',
+                        padding: '16px 24px',
+                        backgroundColor: 'var(--color-gray-0)',
+                        color: 'var(--color-gray-700)',
+                    },
+                }}
+            />
         </QueryClientProvider>
     );
 }
