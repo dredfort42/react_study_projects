@@ -6,6 +6,9 @@ import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
 import Textarea from '../../ui/Textarea';
 import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createCabin } from '../../services/apiCabins';
+import toast from 'react-hot-toast';
 
 const FormRow = styled.div`
     display: grid;
@@ -44,10 +47,21 @@ const Error = styled.span`
 `;
 
 function CreateCabinForm() {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
+
+    const quetyClient = useQueryClient();
+    const { mutate, isLoading: isCreating } = useMutation({
+        mutationFn: createCabin,
+        onSuccess: () => {
+            toast.success('New cabin was successfully created');
+            quetyClient.invalidateQueries({ queryKey: ['cabins'] });
+            reset();
+        },
+        onError: (err) => toast.error(err.message),
+    });
 
     function onSubmit(data) {
-        console.log(data);
+        mutate(data);
     }
 
     return (
@@ -58,20 +72,20 @@ function CreateCabinForm() {
             </FormRow>
 
             <FormRow>
-                <Label htmlFor="maxCapacity">Maximum capacity</Label>
+                <Label htmlFor="max_capacity">Maximum capacity</Label>
                 <Input
                     type="number"
-                    id="maxCapacity"
-                    {...register('maxCapacity')}
+                    id="max_capacity"
+                    {...register('max_capacity')}
                 />
             </FormRow>
 
             <FormRow>
-                <Label htmlFor="regularPrice">Regular price</Label>
+                <Label htmlFor="regular_price">Regular price</Label>
                 <Input
                     type="number"
-                    id="regularPrice"
-                    {...register('regularPrice')}
+                    id="regular_price"
+                    {...register('regular_price')}
                 />
             </FormRow>
 
@@ -96,8 +110,8 @@ function CreateCabinForm() {
             </FormRow>
 
             <FormRow>
-                <Label htmlFor="image">Cabin photo</Label>
-                <FileInput id="image" accept="image/*" />
+                <Label htmlFor="image_url">Cabin photo</Label>
+                <FileInput id="image_url" accept="image/*" />
             </FormRow>
 
             <FormRow>
@@ -105,7 +119,7 @@ function CreateCabinForm() {
                 <Button variation="secondary" type="reset">
                     Cancel
                 </Button>
-                <Button>Add cabin</Button>
+                <Button disabled={isCreating}>Add cabin</Button>
             </FormRow>
         </Form>
     );
