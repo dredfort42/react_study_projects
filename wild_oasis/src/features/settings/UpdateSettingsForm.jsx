@@ -35,7 +35,7 @@ function UpdateSettingsForm() {
 
     return (
         <Form>
-            <FormRow label="Minimum nights/booking">
+            <FormRow label="Minimum nights for booking">
                 <Input
                     type="number"
                     id="min_booking_length"
@@ -50,7 +50,7 @@ function UpdateSettingsForm() {
                     }
                 />
             </FormRow>
-            <FormRow label="Maximum nights/booking">
+            <FormRow label="Maximum nights for booking">
                 <Input
                     type="number"
                     id="max_booking_length"
@@ -65,7 +65,7 @@ function UpdateSettingsForm() {
                     }
                 />
             </FormRow>
-            <FormRow label="Maximum guests/booking">
+            <FormRow label="Maximum guests in one booking">
                 <Input
                     type="number"
                     id="max_guests_per_booking"
