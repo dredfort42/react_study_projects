@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { formatCurrency } from '../../utils/helpers';
-import { useState } from 'react';
 import CreateCabinForm from './CreateCabinForm';
 import { useDeleteCabin } from './useDeleteCabin';
 import { HiPencil, HiSquare2Stack, HiTrash } from 'react-icons/hi2';
 import { useCreateCabin } from './useCreateCabin';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
+import Table from '../../ui/Table';
 
 const TableRow = styled.div`
     display: grid;
@@ -48,7 +48,6 @@ const Discount = styled.div`
 `;
 
 export default function CabinRow({ cabin }) {
-    const [showForm, setShowForm] = useState(false);
     const { isDeleting, deleteCabin } = useDeleteCabin();
     const { isCreating, createCabin } = useCreateCabin();
 
@@ -74,7 +73,7 @@ export default function CabinRow({ cabin }) {
     }
 
     return (
-        <TableRow role="row">
+        <Table.Row role="row">
             <Img src={image_url} />
             <Cabin>{name}</Cabin>
             <div>Fits up to {max_capacity} guests</div>
@@ -110,6 +109,6 @@ export default function CabinRow({ cabin }) {
                     </Modal.Window>
                 </Modal>
             </div>
-        </TableRow>
+        </Table.Row>
     );
 }
