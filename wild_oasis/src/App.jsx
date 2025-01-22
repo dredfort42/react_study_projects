@@ -6,7 +6,8 @@ import GlobalStyles from '../src/styles/GlobalStyles';
 
 import AppLayout from './ui/AppLayout';
 import Dashboard from '../src/pages/Dashboard';
-import Booking from '../src/pages/Bookings';
+import Bookings from '../src/pages/Bookings';
+import Booking from '../src/pages/Booking';
 import Account from '../src/pages/Account';
 import Cabins from '../src/pages/Cabins';
 import Login from '../src/pages/Login';
@@ -41,7 +42,11 @@ export default function App() {
                             element={<Navigate replace to="dashboard" />}
                         />
                         <Route path="dashboard" element={<Dashboard />} />
-                        <Route path="booking" element={<Booking />} />
+                        <Route path="bookings" element={<Bookings />} />
+                        <Route
+                            path="bookings/:bookingId"
+                            element={<Booking />}
+                        />
                         <Route path="account" element={<Account />} />
                         <Route path="cabins" element={<Cabins />} />
                         <Route path="settings" element={<Settings />} />
