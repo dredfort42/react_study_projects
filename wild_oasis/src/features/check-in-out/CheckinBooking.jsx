@@ -12,6 +12,8 @@ import { useMoveBack } from '../../hooks/useMoveBack';
 import { useBooking } from '../bookings/useBooking';
 import Spinner from '../../ui/Spinner';
 import { useEffect, useState } from 'react';
+import { formatCurrency } from '../../utils/helpers';
+import { useCheckin } from './useCheckin';
 
 const Box = styled.div`
     /* Box */
@@ -31,6 +33,7 @@ function CheckinBooking() {
     );
 
     const moveBack = useMoveBack();
+    const { checkin, isCheckingIn } = useCheckin();
 
     if (isPending) return <Spinner />;
 
@@ -43,7 +46,11 @@ function CheckinBooking() {
         number_of_nights,
     } = booking;
 
-    function handleCheckin() {}
+    function handleCheckin() {
+        if (!confirmPaid) return;
+
+        checkin(bookingId);
+    }
 
     return (
         <>
@@ -55,13 +62,22 @@ function CheckinBooking() {
             <BookingDataBox booking={booking} />
 
             <Box>
-                <Checkbox>
-                    {guests.full_name} has paid the total amount
+                <Checkbox
+                    checked={confirmPaid}
+                    onChange={() => setConfirmPaid((confirm) => !confirm)}
+                    id="confirm"
+                    disabled={confirmPaid || isCheckingIn}
+                >
+                    {guests.full_name} has paid the total amount of{' '}
+                    {formatCurrency(total_price)}
                 </Checkbox>
             </Box>
 
             <ButtonGroup>
-                <Button onClick={handleCheckin}>
+                <Button
+                    onClick={handleCheckin}
+                    disabled={!confirmPaid || isCheckingIn}
+                >
                     Check in booking #{bookingId}
                 </Button>
                 <Button variation="secondary" onClick={moveBack}>
