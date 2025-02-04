@@ -7,8 +7,10 @@ import SpinnerMini from '../../ui/SpinnerMini';
 import useLogin from './useLogin';
 
 function LoginForm() {
-    const [email, setEmail] = useState('test@test.org');
-    const [password, setPassword] = useState('test');
+    const [email, setEmail] = useState('tester@user.com');
+    const [password, setPassword] = useState('qwertyui');
+    // const [email, setEmail] = useState('test@test.org');
+    // const [password, setPassword] = useState('test');
     const { login, isPending } = useLogin();
 
     function handleSubmit(e) {
