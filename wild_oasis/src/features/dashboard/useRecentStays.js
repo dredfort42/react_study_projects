@@ -23,6 +23,7 @@ export function useRecentStays() {
     return {
         stays,
         confirmedStays,
+        numDays,
         isPending,
     };
 }
