@@ -4,6 +4,7 @@ import { useRecentStays } from '../../features/dashboard/useRecentStays';
 import { useCabins } from '../../features/cabins/useCabins';
 import Spinner from '../../ui/Spinner';
 import Stats from './Stats';
+import SalesChart from './SalesChart';
 
 const StyledDashboardLayout = styled.div`
     display: grid;
@@ -38,7 +39,7 @@ export default function DashboardLayout() {
             />
             <div>Today's activity</div>
             <div>Chart stay duration</div>
-            <div>Chart sales</div>
+            <SalesChart />
         </StyledDashboardLayout>
     );
 }
