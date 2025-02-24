@@ -95,7 +95,10 @@ export default function SalesChart({ bookings, numDays }) {
 
     return (
         <StyledSalesChart>
-            <Heading as="h2">Sales</Heading>
+            <Heading as="h2">
+                Sales from {format(allDates.at(0), 'dd MMM yyyy')} &mdash;{' '}
+                {format(allDates.at(-1), 'dd MMM yyyy')}
+            </Heading>
 
             <ResponsiveContainer height={300} width="100%">
                 <AreaChart data={data}>
