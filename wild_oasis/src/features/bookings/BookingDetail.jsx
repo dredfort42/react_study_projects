@@ -35,7 +35,6 @@ function BookingDetail() {
         return <Spinner />;
     }
 
-    console.log(booking);
     const { status } = booking;
 
     const statusToTagName = {

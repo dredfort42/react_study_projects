@@ -27,7 +27,7 @@ export function useBookings() {
 
     // QUERY
     const {
-        isLoading,
+        isPending,
         data: { data: bookings, count } = {},
         error,
     } = useQuery({
@@ -51,5 +51,5 @@ export function useBookings() {
         });
     }
 
-    return { isLoading, error, bookings, count };
+    return { isPending, error, bookings, count };
 }
