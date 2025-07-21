@@ -1,7 +1,7 @@
 import CabinList from '@/app/_components/CabinList';
 import Filter from '@/app/_components/Filter';
 import Spinner from '@/app/_components/Spinner';
-import { se } from 'date-fns/locale';
+import ReservationReminder from '@/app/_components/ReservationReminder';
 import { Suspense } from 'react';
 
 // export const revalidate = 3600; // seconds
@@ -34,6 +34,7 @@ export default async function Page({ searchParams }) {
 
             <Suspense fallback={<Spinner />} key={filter}>
                 <CabinList filter={filter} />
+                <ReservationReminder />
             </Suspense>
         </div>
     );
