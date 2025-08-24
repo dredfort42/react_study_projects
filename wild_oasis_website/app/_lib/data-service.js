@@ -1,5 +1,5 @@
 import { eachDayOfInterval } from 'date-fns';
-import { supabase } from './supavase';
+import { supabase } from './supabase';
 import { notFound } from 'next/navigation';
 
 /////////////
